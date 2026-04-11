@@ -1,0 +1,10 @@
+{
+  "name": "@illidan/jot-dispatch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic dispatch for /jot and /anchors slash commands — bypasses the LLM.",
+  "type": "module",
+  "openclaw": {
+    "extensions": ["./index.mjs"]
+  }
+}
