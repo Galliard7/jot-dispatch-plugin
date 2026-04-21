@@ -1,7 +1,7 @@
 {
   "id": "jot-dispatch",
   "name": "Jot Dispatch",
-  "description": "Deterministic dispatch for /jot and /anchors slash commands — bypasses the LLM.",
+  "description": "Deterministic dispatch for /jot, /anchors, and /idea slash commands — bypasses the LLM.",
   "enabledByDefault": true,
   "configSchema": {
     "type": "object",

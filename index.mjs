@@ -1,6 +1,7 @@
-// jot-dispatch plugin — routes /jot and /anchors slash commands directly to
-// their backing Python scripts, bypassing the LLM entirely. This exists
-// because LLM-based dispatch is unreliable for deterministic commands:
+// jot-dispatch plugin — routes /jot, /anchors, and /idea slash commands
+// directly to their backing Python scripts, bypassing the LLM entirely.
+// This exists because LLM-based dispatch is unreliable for deterministic
+// commands:
 // - bare `/jot` triggers "let me know what you want" responses
 // - imperative-verb args ("Run X", "Fix Y") get rewritten or swallowed
 //
@@ -39,6 +40,7 @@ const DISPATCH_PARAMS_SCHEMA = {
 const SKILL_SCRIPTS = {
   jot: path.join(homedir(), "skill-backends/jot/jot.py"),
   anchors: path.join(homedir(), "skill-backends/anchors/anchors.py"),
+  idea: path.join(homedir(), "skill-backends/noteflow/nf-idea.py"),
 };
 
 // Simple whitespace-split of the raw arg string into argv. The Python scripts
@@ -77,7 +79,7 @@ const JotDispatchPlugin = {
   id: "jot-dispatch",
   name: "Jot Dispatch",
   description:
-    "Deterministic dispatch for /jot and /anchors slash commands — bypasses the LLM.",
+    "Deterministic dispatch for /jot, /anchors, and /idea slash commands — bypasses the LLM.",
   get configSchema() {
     return EMPTY_OBJECT_SCHEMA;
   },
@@ -87,7 +89,7 @@ const JotDispatchPlugin = {
         name: "jot_dispatch",
         label: "Jot Dispatch",
         description:
-          "Internal: dispatches /jot and /anchors slash commands to their backing Python scripts. Routed via skill command-dispatch — do not call directly from agent reasoning.",
+          "Internal: dispatches /jot, /anchors, and /idea slash commands to their backing Python scripts. Routed via skill command-dispatch — do not call directly from agent reasoning.",
         parameters: DISPATCH_PARAMS_SCHEMA,
         ownerOnly: true,
         async execute(_toolCallId, params) {
